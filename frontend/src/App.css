@@ -1,0 +1,320 @@
+:root {
+  --bg: #0f0f14;
+  --panel: #151520;
+  --panel2: #1b1b27;
+  --text: #ffffff;
+  --muted: #a8a8b3;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Center whole app */
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+  text-align: center;
+}
+
+.topbar {
+  margin-bottom: 50px;
+}
+
+.title {
+  margin: 0;
+  font-size: 56px;
+  letter-spacing: -0.5px;
+}
+
+.sub {
+  color: var(--muted);
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Center both cards together */
+.layout {
+  display: grid;
+  grid-template-columns: 420px 520px;
+  gap: 30px;
+  justify-content: center;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.panelTitle {
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.dateChip {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+/* Calendar header (month bar centered perfectly) */
+.calHeader {
+  margin-bottom: 10px;
+}
+
+/* month bar */
+.monthNav {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centers the text */
+  align-items: center;
+
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 0;
+}
+
+.monthLabel {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* arrows absolute so they don't push the text */
+.iconBtn {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.iconBtn:first-child {
+  left: 10px;
+}
+
+.iconBtn:last-child {
+  right: 10px;
+}
+
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Days of week */
+.dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin: 12px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dowCell {
+  text-align: center;
+}
+
+/* Calendar grid */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.day.blank {
+  height: 54px;
+}
+
+.dayBtn {
+  height: 54px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  padding: 10px;
+  transition: 0.15s;
+}
+
+.dayBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.dayBtn.active {
+  outline: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.dayNum {
+  font-weight: 800;
+}
+
+.badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #7c3aed;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+/* Tasks UI */
+.addRow {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 16px;
+}
+
+.taskInput {
+  flex: 1;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding: 12px 14px;
+  outline: none;
+}
+
+.taskInput::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.addBtn {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.addBtn:hover {
+  filter: brightness(1.1);
+}
+
+.sectionHead {
+  margin-top: 14px;
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.taskCard {
+  display: grid;
+  grid-template-columns: 36px 1fr 40px;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  transition: 0.15s;
+}
+
+.taskCard:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.taskCard.done {
+  opacity: 0.85;
+}
+
+.taskText {
+  font-weight: 700;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.check {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.check.filled {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Better delete button (no emoji look) */
+.trash {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.trash:hover {
+  background: rgba(255,80,80,0.15);
+  border-color: rgba(255,80,80,0.4);
+  color: #ff6b6b;
+}
+.trash:hover {
+  background: rgba(255, 80, 80, 0.18);
+  border-color: rgba(255, 80, 80, 0.35);
+  color: white;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+}
