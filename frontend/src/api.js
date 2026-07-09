@@ -1,24 +1,57 @@
-import axios from "axios";
+const LOCAL_STORAGE_KEY = "priorityflow_tasks";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
-const API_URL = `${API_BASE}/api/tasks`;
+// Helper to get tasks from localStorage
+const getLocalTasks = () => {
+  const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
+};
+
+// Helper to save tasks to localStorage
+const saveLocalTasks = (tasks) => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+};
 
 export const getTasks = async () => {
-  const response = await axios.get(API_URL);
-  return response.data;
+  // Simulate network latency for authentic feel
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  return getLocalTasks();
 };
 
 export const createTask = async (taskData) => {
-  const response = await axios.post(API_URL, taskData);
-  return response.data;
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  const tasks = getLocalTasks();
+  const newTask = {
+    ...taskData,
+    _id: crypto.randomUUID(),
+    completed: taskData.completed || false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  tasks.push(newTask);
+  saveLocalTasks(tasks);
+  return newTask;
 };
 
 export const updateTask = async (id, taskData) => {
-  const response = await axios.put(`${API_URL}/${id}`, taskData);
-  return response.data;
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  const tasks = getLocalTasks();
+  const index = tasks.findIndex((t) => t._id === id);
+  if (index !== -1) {
+    tasks[index] = {
+      ...tasks[index],
+      ...taskData,
+      updatedAt: new Date().toISOString(),
+    };
+    saveLocalTasks(tasks);
+    return tasks[index];
+  }
+  throw new Error("Task not found");
 };
 
 export const deleteTask = async (id) => {
-  const response = await axios.delete(`${API_URL}/${id}`);
-  return response.data;
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  const tasks = getLocalTasks();
+  const filtered = tasks.filter((t) => t._id !== id);
+  saveLocalTasks(filtered);
+  return { message: "Task deleted" };
 };
